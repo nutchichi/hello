@@ -1,5 +1,6 @@
 package main
 
-func main()  {
-	println("Hello World")
+func main() {
+	var name = "Nutchichi"
+	println("Hello World", name)
 }

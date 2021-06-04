@@ -1,0 +1,530 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "E-Withholding Tax",
+    "description": "An example API documentation for a E-Withholding tax.\n\n<img src=\"https://pcmer.com/wp-content/uploads/2019/09/%E0%B9%80%E0%B8%9B%E0%B9%8B%E0%B8%B2%E0%B8%95%E0%B8%B1%E0%B8%87.png\"/>\n",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://www.uat-inno.ktb.co.th/paotang/{environment}/tax/",
+      "variables": {
+        "environment": {
+          "default": "test/uat/bond",
+          "enum": [
+            "test/uat/bond",
+            "v1/bond"
+          ]
+        }
+      }
+    },
+    {
+      "url": "http://localhost:8000/"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "BaseHeaderRequest": {
+        "type": "object",
+        "properties": {
+          "reqID": {
+            "type": "string",
+            "example": "",
+            "description": ""
+          },
+          "reqChannel": {
+            "type": "string",
+            "example": "",
+            "description": ""
+          },
+          "reqDtm": {
+            "type": "string",
+            "example": "",
+            "description": ""
+          },
+          "service": {
+            "type": "string",
+            "example": "",
+            "description": ""
+          },
+          "txnRefID": {
+            "type": "string",
+            "example": "",
+            "description": ""
+          },
+          "ip": {
+            "type": "string",
+            "example": "",
+            "description": ""
+          },
+          "sofType": {
+            "type": "string",
+            "example": "",
+            "description": ""
+          }
+        }
+      },
+      "BaseHeaderResponse": {
+        "type": "object",
+        "properties": {
+          "reqID": {
+            "type": "string",
+            "example": "",
+            "description": ""
+          },
+          "reqDtm": {
+            "type": "string",
+            "example": "",
+            "description": ""
+          },
+          "txnRefID": {
+            "type": "string",
+            "example": "",
+            "description": ""
+          },
+          "service": {
+            "type": "string",
+            "example": "",
+            "description": ""
+          },
+          "statusCd": {
+            "type": "string",
+            "example": "0000",
+            "description": ""
+          },
+          "statusDesc": {
+            "type": "string",
+            "example": "",
+            "description": "Success"
+          }
+        }
+      },
+      "DocumentRequest": {
+        "type": "object",
+        "properties": {
+          "walletId": {
+            "type": "string",
+            "example": "006123456789",
+            "description": ""
+          },
+          "email": {
+            "type": "string",
+            "example": "test@gmail.com",
+            "description": ""
+          },
+          "year": {
+            "type": "string",
+            "example": "2554",
+            "description": ""
+          }
+        }
+      },
+      "DocumentResponse": {
+        "type": "object",
+        "properties": {
+          "hasInformation": {
+            "type": "string",
+            "example": "Y",
+            "description": ""
+          }
+        }
+      },
+      "GetYearRequest": {
+        "type": "object",
+        "nullable": true,
+        "properties": {
+          "requestId": {
+            "type": "string",
+            "nullable": true,
+            "example": "",
+            "description": "not being use, but"
+          }
+        }
+      },
+      "GetYearResponse": {
+        "type": "object",
+        "properties": {
+          "years": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "display": {
+                  "type": "string",
+                  "example": "2564",
+                  "description": "thai buddhist year"
+                },
+                "value": {
+                  "type": "string",
+                  "example": "2021",
+                  "description": "christian year"
+                },
+                "displayFull": {
+                  "type": "string",
+                  "example": "ปีนำส่งภาษี : 2564",
+                  "description": "thai buddhist year with phase for drop down display "
+                }
+              }
+            }
+          }
+        }
+      },
+      "ItemsInterestRequest": {
+        "type": "object",
+        "properties": {
+          "walletId": {
+            "type": "string",
+            "example": "0000",
+            "description": "wallet id"
+          },
+          "taxYear": {
+            "type": "string",
+            "example": "2564",
+            "description": "4 digit thai buddhist year"
+          },
+          "thaiSymbol": {
+            "type": "string",
+            "nullable": true,
+            "example": "TH0013057B05",
+            "description": "thai symbol ref id"
+          }
+        }
+      },
+      "ItemsInterestResponse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "thaiSymbols": {
+                  "type": "string",
+                  "example": "TH0013057B05",
+                  "description": "thai symbol"
+                },
+                "bondName": {
+                  "type": "string",
+                  "example": "พัณนธบัตรออมทรัพย์ของกระทรวงการคลับ ประเภทยอยชำระเงินต้น ในปีงบประมาณ พ.ศ. 2563 รุ่นอายุ 5 ปี",
+                  "description": "name of bond"
+                },
+                "taxAmount": {
+                  "type": "string",
+                  "example": "15.12",
+                  "description": "amount of tax"
+                },
+                "intBeforeTax": {
+                  "type": "string",
+                  "example": "100",
+                  "description": "interest before tax"
+                },
+                "intAfterTax": {
+                  "type": "string",
+                  "example": "84.8",
+                  "description": "interest before tax"
+                },
+                "ewhtDate": {
+                  "type": "string",
+                  "example": "2564-04-10",
+                  "description": "e-with holding tax date"
+                },
+                "paymentDate": {
+                  "type": "string",
+                  "example": "2564-04-10",
+                  "description": "payment date"
+                },
+                "calDay": {
+                  "type": "string",
+                  "example": "182",
+                  "description": "interest calculation date"
+                },
+                "customerName": {
+                  "type": "string",
+                  "example": "วายุ มีตัง",
+                  "description": "name of customer"
+                },
+                "taxId": {
+                  "type": "string",
+                  "example": "1234567890123",
+                  "description": "tax id (13 digit)"
+                },
+                "incomeType": {
+                  "type": "string",
+                  "example": "ดอกเบี้ย ฯลฯ ตาม มาตรา 40(4)(ก)",
+                  "description": "type of income"
+                },
+                "payerTaxId": {
+                  "type": "string",
+                  "example": "1234567890123",
+                  "description": "tax id of payer (13 digit)"
+                },
+                "rdRefNo": {
+                  "type": "string",
+                  "example": "202101101234567890",
+                  "description": "ref no"
+                }
+              }
+            }
+          }
+        }
+      },
+      "SummaryRequest": {
+        "type": "object",
+        "properties": {
+          "walletId": {
+            "type": "string",
+            "example": "006123456789",
+            "description": ""
+          },
+          "year": {
+            "type": "string",
+            "example": "2001",
+            "description": ""
+          }
+        }
+      },
+      "SummaryResponse": {
+        "type": "object",
+        "properties": {
+          "hasInformation": {
+            "type": "string",
+            "example": "Y",
+            "description": ""
+          }
+        }
+      }
+    },
+    "responses": {
+      "error": {
+        "description": "ERROR",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "description": "Describes the error in a human-readable format.",
+                  "type": "string",
+                  "example": "Permission denied."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "task": {
+        "name": "id",
+        "in": "query",
+        "required": true,
+        "description": "The identifier of the task at hand.",
+        "schema": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/yearly/request": {
+      "post": {
+        "tags": [
+          "E-Withholding Tax"
+        ],
+        "summary": "Service สำหรับการส่ง Email",
+        "description": "รวบรวมรายการภาษีของปีนั้นๆ และส่ง Email",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "headerReq": {
+                    "$ref": "#/components/schemas/BaseHeaderRequest"
+                  },
+                  "content": {
+                    "$ref": "#/components/schemas/DocumentRequest"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "headerReq": {
+                      "$ref": "#/components/schemas/BaseHeaderResponse"
+                    },
+                    "content": {
+                      "$ref": "#/components/schemas/DocumentResponse"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/e-withhold/interest/years/get": {
+      "post": {
+        "tags": [
+          "interest"
+        ],
+        "summary": "get year",
+        "description": "get year",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "headerReq": {
+                    "$ref": "#/components/schemas/BaseHeaderRequest"
+                  },
+                  "content": {
+                    "$ref": "#/components/schemas/GetYearRequest"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "headerReq": {
+                      "$ref": "#/components/schemas/BaseHeaderResponse"
+                    },
+                    "content": {
+                      "$ref": "#/components/schemas/GetYearResponse"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/e-withhold/interest/list/get": {
+      "post": {
+        "tags": [
+          "interest"
+        ],
+        "summary": "get list",
+        "description": "get list of tax detail",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "headerReq": {
+                    "$ref": "#/components/schemas/BaseHeaderRequest"
+                  },
+                  "content": {
+                    "$ref": "#/components/schemas/ItemsInterestRequest"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "headerReq": {
+                      "$ref": "#/components/schemas/BaseHeaderResponse"
+                    },
+                    "content": {
+                      "$ref": "#/components/schemas/ItemsInterestResponse"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/yearly/summary": {
+      "post": {
+        "tags": [
+          "E-Withholding Tax"
+        ],
+        "summary": "Service สำหรับตรวจสอบภาษี",
+        "description": "ตรวจสอบรายการภาษีของปีนั้นๆ",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "headerReq": {
+                    "$ref": "#/components/schemas/BaseHeaderRequest"
+                  },
+                  "content": {
+                    "$ref": "#/components/schemas/SummaryRequest"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "headerReq": {
+                      "$ref": "#/components/schemas/BaseHeaderResponse"
+                    },
+                    "content": {
+                      "$ref": "#/components/schemas/SummaryResponse"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    }
+  }
+}

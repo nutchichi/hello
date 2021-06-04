@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "E-Withholding Tax",
-    "description": "An example API documentation for a E-Withholding tax.\n\n<img src=\"https://pcmer.com/wp-content/uploads/2019/09/%E0%B9%80%E0%B8%9B%E0%B9%8B%E0%B8%B2%E0%B8%95%E0%B8%B1%E0%B8%87.png\"/>\n",
+    "description": "An example API documentation for a E-Withholding tax.",
     "version": "1.0"
   },
   "servers": [

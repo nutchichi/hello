@@ -94,8 +94,8 @@
           },
           "statusDesc": {
             "type": "string",
-            "example": "",
-            "description": "Success"
+            "example": "Success",
+            "description": ""
           }
         }
       },

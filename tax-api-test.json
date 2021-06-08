@@ -105,7 +105,7 @@
           "walletId": {
             "type": "string",
             "example": "006123456789",
-            "description": ""
+            "description": "test xxxxxx"
           },
           "email": {
             "type": "string",

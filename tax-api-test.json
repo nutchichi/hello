@@ -136,7 +136,7 @@
           "requestId": {
             "type": "string",
             "nullable": true,
-            "example": "",
+            "example": "test xxxx111",
             "description": "not being use, but"
           }
         }
